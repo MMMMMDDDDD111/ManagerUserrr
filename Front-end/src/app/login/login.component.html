@@ -1,0 +1,18 @@
+<h3 mat-dialog-title>Login</h3>
+<div mat-dialog-content class="flex justify-content-center align-items-center">
+  <form [formGroup]="loginForm">
+    <mat-form-field appearance="outline">
+      <mat-label>User Name</mat-label>
+      <input formControlName="userName" matInput placeholder="User Name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput placeholder="Password" type="password">
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+    <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" (click)="loginUser()">Login</button>
+     Register here??? <button mat-raised-button color="primary" (click)="registerUser()">Register</button>
+</div>

@@ -1,0 +1,35 @@
+<h3 mat-dialog-title>Register</h3>
+<div mat-dialog-content class="flex justify-content-center align-items-center">
+  <form [formGroup]="registerForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline">
+      <mat-label>User Name</mat-label>
+      <input formControlName="userName" matInput placeholder="User Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input formControlName="email" matInput placeholder="Enter email pls">
+      </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <input formControlName="address" matInput placeholder="Enter address pls">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput placeholder="Password" type="password">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Confirm Password</mat-label>
+      <input formControlName="password" matInput placeholder="Confirm password pls" type="password">
+    </mat-form-field>
+
+    <div mat-dialog-actions [align]="'end'">
+        <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+        <button mat-raised-button color="primary">Submit</button>
+    </div>
+  </form>
+</div>
+

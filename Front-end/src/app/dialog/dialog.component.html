@@ -1,0 +1,34 @@
+<h3 mat-dialog-title> + Add User Form</h3>
+<div mat-dialog-content>
+  <form [formGroup]="userForm">
+    <mat-form-field appearance="outline">
+      <mat-label>ID:</mat-label>
+      <input formControlName="id" matInput placeholder="ID">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>User NO:</mat-label>
+      <input formControlName="userNo" matInput placeholder="Number">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Full Name:</mat-label>
+      <input formControlName="fullName" matInput placeholder="Full Name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Position:</mat-label>
+      <mat-select formControlName="position" placeholder="Choose Position">
+        <mat-option value="Choosen">Chosen Position</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Hire Date:</mat-label>
+      <input formControlName="hireDate" matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+  <button mat-raised-button color="primary" (click)="addUser()" [style.marginLeft]="'8px'">{{ actionBtn }}</button>
+</div>
