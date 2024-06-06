@@ -15,6 +15,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Session } from 'inspector';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -36,12 +37,15 @@ import { Session } from 'inspector';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
+
+
   loginForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, 
     private api: ApiService, 
     private dialog : MatDialog,
-    public dialogRef : MatDialogRef<LoginComponent>
+    public dialogRef : MatDialogRef<LoginComponent>,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +60,10 @@ export class LoginComponent implements OnInit {
       width: '50%'
     });
   }
+  
+  changePassword() {
+throw new Error('Method not implemented.');
+}
 
   loginUser() {
     if (this.loginForm.valid) {
@@ -67,7 +75,7 @@ export class LoginComponent implements OnInit {
           this.dialogRef.close(); 
         },
         error: (error) => {
-          alert('Error while logging in the user');
+          alert('User Name or Password invalid');
           console.log("Error in proceeing login", error)
         }
       });

@@ -22,14 +22,16 @@ import {MatTableModule} from '@angular/material/table';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { CookieService } from 'ngx-cookie-service';
+import { PositionComponent } from '../position/position.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PositionComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,7 @@ import { MessageService } from 'primeng/api';
     MatTableModule,
     ToastModule,
   ],
-  providers:[ApiService],
+  providers: [ApiService, CookieService],
   bootstrap:[AppComponent]
 })
 export class AppModule { }

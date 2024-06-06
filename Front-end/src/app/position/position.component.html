@@ -1,0 +1,19 @@
+<h3 mat-dialog-title>{{ actionBtn }} Position</h3>
+<div mat-dialog-content>
+  <form [formGroup]="positionForm" (ngSubmit)="addPosition()">
+    <mat-form-field appearance="outline">
+      <mat-label>Position Name</mat-label>
+      <input matInput formControlName="positionName" placeholder="Position Name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>User IDs</mat-label>
+      <input matInput formControlName="userIds" placeholder="User IDs (comma separated)">
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+      <button mat-raised-button color="primary" type="submit">{{ actionBtn }}</button>
+    </div>
+  </form>
+</div>

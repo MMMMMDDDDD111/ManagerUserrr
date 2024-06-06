@@ -5,17 +5,37 @@
   <span>Manager User App</span>
   <span class="example-spacer"></span>
   <button mat-flat-button color="primary" (click)="openDialog()">+ Add User</button>
-  <button mat-flat-button color="warn" *ngIf="!isLoggedIn" (click)="openDialogLogin()">Login</button>
-  <button mat-flat-button color="warn" *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+  <button mat-raised-button [ngStyle]="{'background-color': 'darkgreen', 'color': 'white'}" (click)="openDialogPosition()">+ Add Position</button>
+  <button mat-raised-button color="primary" (click)="openDialogPosition()">Edit</button>
+  <div class="card flex justify-content-center" *ngIf="!isLoggedIn">
+    <p-menu [model]="loginItems"></p-menu>
+    <ng-template #loginTemplate>
+      <button mat-flat-button color="warn" (click)="openDialogLogin()">Login</button>
+    </ng-template>
+  </div>
+
+  <div class="card" *ngIf="isLoggedIn">
+    <div class="panel-menu-container">
+      <p-panelMenu [model]="items" [style]="{'width':'100px'}" [multiple]="true"></p-panelMenu>
+    </div>
+    <ng-container *ngIf="isLoggedIn">
+      <span class="logged-in-user">{{ user$ | async }}</span>
+    </ng-container>
+  </div>
 </mat-toolbar>
 
 <div class="container">
-  <div style="margin-top: 10px;">
+  <div style="margin-top: 20px;">
     <mat-form-field>
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder=" " #input>
     </mat-form-field>
-    
+    <div class="container">
+      <h6>List of Users 
+        <span class="sync-button" (click)="getAllUsers()">
+          Refresh <span class="pi pi-refresh"></span>
+        </span>
+      </h6>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
     
@@ -28,7 +48,7 @@
         <!-- UserNo Column -->
         <ng-container matColumnDef="userNo">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> User No </th>
-          <td mat-cell *matCellDef="let row"> {{row.userNo}}% </td>
+          <td mat-cell *matCellDef="let row"> {{row.userNo}} </td>
         </ng-container>
     
         <!-- FullName Column -->
@@ -38,41 +58,37 @@
         </ng-container>
 
         <!-- Position Column -->
-        <ng-container matColumnDef="position">
+        <ng-container matColumnDef="positionName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Position </th>
-          <td mat-cell *matCellDef="let row"> {{row.position}} </td>
+          <td mat-cell *matCellDef="let row"> {{row.position.positionName}} </td>
         </ng-container>
     
-        <!-- Hire Date Column -->
-        <ng-container matColumnDef="hireDate">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-          <td mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" (click)="editUsers(row)">
-              <mat-icon>Edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn">
-              <mat-icon>Delete</mat-icon>
-            </button>
-           </td>
-        </ng-container>
+       <!-- Hire Date Column -->
+       <ng-container matColumnDef="hireDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Hire Date </th>
+        <td mat-cell *matCellDef="let row"> {{row.hireDate | date}} </td>
+      </ng-container>
 
-        <!-- Action Column -->
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-          <td mat-cell *matCellDef="let row"> {{row.action}} </td>
-        </ng-container>
-    
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-raised-button color="primary" (click)="editUser(row)">
+            <mat-icon>edit</mat-icon>Edit
+          </button>
+          <button mat-flat-button color="warn" (click)="deleteUser(row)">
+            <mat-icon>delete</mat-icon>Delete
+          </button>
+        </td>
+      </ng-container>      
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
           <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
         </tr>
       </table>
-    
       <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
-    
   </div>
 </div>
